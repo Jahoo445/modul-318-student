@@ -32,7 +32,6 @@ namespace SBB_APP
             }
         }
 
-
         private void GetConnectionswithCards(Connection connection)
         {
             try
@@ -109,9 +108,6 @@ namespace SBB_APP
             }
         }
 
-
-
-
         private void GetStations()
         {
             int lala;
@@ -136,7 +132,7 @@ namespace SBB_APP
             }
             Connections _connections = _transportHandler.GetConnections(cmbStartLocation.Text, cmbDestinationLocation.Text, lala, trainTime, trainTime);
 
-            flpStationResult.Controls.Clear();
+            
 
             foreach (Connection connection in _connections.ConnectionList)
             {
@@ -156,10 +152,92 @@ namespace SBB_APP
             cmbDestinationLocation.SelectionStart= cmbDestinationLocation.Text.Length;
         }
 
+        private void getPossibleestinations()
+        {
+            try
+            {
+                Station station = _transportHandler.GetStations(cmbStartLocation.Text).StationList.ElementAt(0);
 
+                StationBoardRoot Board = _transportHandler.GetStationBoard(station.Name);
+
+                Cursor.Current = Cursors.WaitCursor;
+
+                int lala;
+                DateTime trainTime;
+
+                if (chbSpecifyTime.Checked)
+                {
+                    if (rdbDeparture.Checked)
+                    {
+                        lala = 0;
+                    }
+                    else
+                    {
+                        lala = 1;
+                    }
+                    trainTime = dtpTime.Value;
+                }
+                else
+                {
+                    lala = 0;
+                    trainTime = DateTime.Now;
+                }
+
+                int CounterCards = 0;
+                foreach (StationBoard bord in Board.Entries)
+                {
+                    try
+                    {
+                        
+                        Connections _connections = _transportHandler.GetConnections(station.Name, bord.To, lala, trainTime, trainTime);
+                        foreach (Connection connection in _connections.ConnectionList)
+                        {
+                            int i = 0;
+                            GetConnectionswithCards(connection);
+                            i++;
+                            if (i == 1)
+                            {
+                                break;
+                            }
+                        }
+                        CounterCards++;
+                        if (CounterCards == 5)
+                        {
+                            break;
+                        }
+                    }
+                    catch
+                    {
+                        return;
+                    }
+                    
+
+                }
+                // reset cursor 
+                Cursor.Current = Cursors.Default;
+            }
+            catch
+            {
+                return;
+            }
+        }
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            GetStations();
+            flpStationResult.Controls.Clear ();
+            if (cmbDestinationLocation.Text == "")
+            {
+                getPossibleestinations();
+            }
+
+            else if (cmbStartLocation.Text == "")
+            {
+
+            }
+
+            else
+            {
+                GetStations();
+            }
         }
 
         private void chbSpecifyTime_CheckedChanged(object sender, EventArgs e)

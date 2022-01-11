@@ -50,6 +50,7 @@
             this.btnCardShare.TabIndex = 0;
             this.btnCardShare.Text = "Teilen";
             this.btnCardShare.UseVisualStyleBackColor = true;
+            this.btnCardShare.Click += new System.EventHandler(this.btnCardShare_Click);
             // 
             // btnCardKarte
             // 

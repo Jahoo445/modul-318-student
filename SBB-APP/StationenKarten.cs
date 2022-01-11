@@ -12,10 +12,12 @@ namespace SBB_APP
 {
     public partial class Stationen_Karten : UserControl
     {
+        private MailTo _SendMail;
 #pragma warning disable CS8618 // Ein Non-Nullable-Feld muss beim Beenden des Konstruktors einen Wert ungleich NULL enthalten. Erwägen Sie die Deklaration als Nullable.
         public Stationen_Karten()
         {
             InitializeComponent();
+            _SendMail = new MailTo();
         }
 
 
@@ -110,6 +112,11 @@ namespace SBB_APP
         private void Stationen_Karten_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnCardShare_Click(object sender, EventArgs e)
+        {
+            _SendMail.ShowDialog(this);
         }
     }
 }

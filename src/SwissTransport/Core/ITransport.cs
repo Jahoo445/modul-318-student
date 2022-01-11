@@ -10,9 +10,9 @@
 
         Stations GetStations(string query);
 
-        Task<StationBoardRoot> GetStationBoardAsync(string station, string id);
+        Task<StationBoardRoot> GetStationBoardAsync(string station);
 
-        StationBoardRoot GetStationBoard(string station, string id);
+        StationBoardRoot GetStationBoard(string station);
 
         Task<Connections> GetConnectionsAsync(string fromStation, string toStation, int isArrivalTime, DateTime date, DateTime time);
 

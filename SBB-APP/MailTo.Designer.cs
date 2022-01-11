@@ -44,6 +44,7 @@
             this.btnMailToSend.TabIndex = 0;
             this.btnMailToSend.Text = "Senden ";
             this.btnMailToSend.UseVisualStyleBackColor = true;
+            this.btnMailToSend.Click += new System.EventHandler(this.btnMailToSend_Click);
             // 
             // tbxMailToSendTo
             // 
