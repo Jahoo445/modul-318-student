@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Mail;
+using System.Net;
+using System.Net.Mime;
+using System.Threading;
 
 namespace SBB_APP
 {
@@ -18,57 +21,75 @@ namespace SBB_APP
         {
             InitializeComponent();
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnMailToSend_Click(object sender, EventArgs e)
         {
 
         }
-        //private void GetConnectionswithCardss(StationBoard connection, Station station)
+
+        private void MailTo_Load(object sender, EventArgs e)
+        {
+
+        }
+        //static bool mailSent = false;
+        //private static void SendCompletedCallback(object sender, AsyncCompletedEventArgs e)
         //{
-        //    Connections _connections = _transportHandler.GetConnections(cmbStartLocation.Text, cmbDestinationLocation.Text, lala, trainTime, trainTime);
-        //    Connections _connections = _transportHandler.GetConnections(cmbStartLocation.Text, Convert.ToString(connection.To), lala, trainTime, trainTime);
-        //    try
+        //    // Get the unique identifier for this asynchronous operation.
+        //    String token = (string)e.UserState;
+
+        //    if (e.Cancelled)
         //    {
-        //        TimeSpan? Fahrdauer;
-        //        var stationenKarten = new Stationen_Karten();
-        //        flpStationResult.Controls.Add(stationenKarten);
-        //        stationenKarten.Width = 829;
-        //        stationenKarten.Height = 150;
-        //        stationenKarten.Titel = Convert.ToString(station.Name) + " --> " + Convert.ToString(connection.To);
-        //        stationenKarten.Info1Bez = "Abfahrtzeit: ";
-        //        stationenKarten.Info1 = connection.Stop.Departure.ToString("dd.mm.yyyy hh:mm");
-        //        stationenKarten.Info2Bez = "ankunftszeit: ";
-        //        stationenKarten.Info2 = connection.to.arrival.value.tostring("dd.mm.yyyy hh:mm");
-
-        //        stationenKarten.info3bez = "fahrtdauer: ";
-        //        Fahrdauer = connection.to.arrival - connection.from.departure;
-        //        if (fahrdauer.hasvalue)
-        //        {
-        //            stationenkarten.info3 = fahrdauer.value.tostring(@"hh\:mm");
-        //        }
-        //        if (connection.to.delay > 0 || connection.to.delay != null)
-        //        {
-        //            stationenkarten.verspaetung1 = "+ " + convert.tostring(connection.to.delay);
-        //        }
-        //        else
-        //        {
-        //            stationenkarten.verspaetung1 = "";
-        //            stationenkarten.verspaetungbez = "";
-        //        }
-        //        i++;
-        //        if (i == 10) { break; }
-
+        //        Console.WriteLine("[{0}] Send canceled.", token);
         //    }
-        //    catch
+        //    if (e.Error != null)
         //    {
-        //        System.Windows.Forms.MessageBox.Show("Keine Ergebnisse gefunden.");
+        //        Console.WriteLine("[{0}] {1}", token, e.Error.ToString());
         //    }
-
+        //    else
+        //    {
+        //        Console.WriteLine("Message sent.");
+        //    }
+        //    mailSent = true;
+        //}
+        //public static void Janis(string[] args)
+        //{
+        //    // Command-line argument must be the SMTP host.
+        //    SmtpClient client = new SmtpClient(args[0]);
+        //    // Specify the email sender.
+        //    // Create a mailing address that includes a UTF8 character
+        //    // in the display name.
+        //    MailAddress from = new MailAddress("jane@contoso.com",
+        //       "Jane " + (char)0xD8 + " Clayton",
+        //    System.Text.Encoding.UTF8);
+        //    // Set destinations for the email message.
+        //    MailAddress to = new MailAddress("ben@contoso.com");
+        //    // Specify the message content.
+        //    MailMessage message = new MailMessage(from, to);
+        //    message.Body = "This is a test email message sent by an application. ";
+        //    // Include some non-ASCII characters in body and subject.
+        //    string someArrows = new string(new char[] { '\u2190', '\u2191', '\u2192', '\u2193' });
+        //    message.Body += Environment.NewLine + someArrows;
+        //    message.BodyEncoding = System.Text.Encoding.UTF8;
+        //    message.Subject = "test message 1" + someArrows;
+        //    message.SubjectEncoding = System.Text.Encoding.UTF8;
+        //    // Set the method that is called back when the send operation ends.
+        //    client.SendCompleted += new
+        //    SendCompletedEventHandler(SendCompletedCallback);
+        //    // The userState can be any object that allows your callback
+        //    // method to identify this send operation.
+        //    // For this example, the userToken is a string constant.
+        //    string userState = "test message1";
+        //    client.SendAsync(message, userState);
+        //    Console.WriteLine("Sending message... press c to cancel mail. Press any other key to exit.");
+        //    string answer = Console.ReadLine();
+        //    // If the user canceled the send, and mail hasn't been sent yet,
+        //    // then cancel the pending operation.
+        //    if (answer.StartsWith("c") && mailSent == false)
+        //    {
+        //        client.SendAsyncCancel();
+        //    }
+        //    // Clean up.
+        //    message.Dispose();
+        //    Console.WriteLine("Goodbye.");
         //}
     }
 }

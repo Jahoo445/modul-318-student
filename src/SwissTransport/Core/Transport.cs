@@ -36,7 +36,6 @@
                 throw new ArgumentNullException(nameof(station));
             }
 
-
             var uri = new Uri($"{WebApiHost}stationboard?station={station}");
             return await this
                 .GetObjectAsync<StationBoardRoot>(uri)

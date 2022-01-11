@@ -118,5 +118,11 @@ namespace SBB_APP
         {
             _SendMail.ShowDialog(this);
         }
+
+        private void btnCardKarte_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Funktion noch nicht vorhanden \n" +
+                "Error");
+        }
     }
 }

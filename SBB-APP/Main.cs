@@ -221,22 +221,64 @@ namespace SBB_APP
                 return;
             }
         }
+        private void ButtonChange_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            flpStationResult.Controls.Clear ();
-            if (cmbDestinationLocation.Text == "")
+            try
             {
-                getPossibleestinations();
+                flpStationResult.Controls.Clear();
+                if (rdbTimetable.Checked == true)
+                {
+                    getPossibleestinations();
+
+                }
+                else if (rdbFromTo.Checked == true)
+                {
+                    GetStations();
+                }
+                if (rdbTakeMeHome.Checked == true)
+                {
+                    TakeMeHome();
+                }
+            }
+            catch
+            {
+                return;
             }
 
-            else if (cmbStartLocation.Text == "")
+        }
+        private void TakeMeHome()
+        {
+            int lala;
+            DateTime trainTime;
+
+            if (chbSpecifyTime.Checked)
             {
-
+                if (rdbDeparture.Checked)
+                {
+                    lala = 0;
+                }
+                else
+                {
+                    lala = 1;
+                }
+                trainTime = dtpTime.Value;
             }
-
             else
             {
-                GetStations();
+                lala = 0;
+                trainTime = DateTime.Now;
+            }
+
+            Connections _connections = _transportHandler.GetConnections(cmbStartLocation.Text, "Rothenburg", lala, trainTime, trainTime);
+
+            foreach (Connection connection in _connections.ConnectionList)
+            {
+                GetConnectionswithCards(connection);
             }
         }
 
@@ -244,6 +286,69 @@ namespace SBB_APP
         {
             ButtonsCheckEnabled();
         }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPictureReverser_Click(object sender, EventArgs e)
+        {
+            string textVor = "";
+            string textNach = "";
+
+            textVor = cmbStartLocation.Text.ToString();
+            textNach = cmbDestinationLocation.Text.ToString();
+            
+            cmbStartLocation.Text = textNach;            
+            cmbDestinationLocation.Text = textVor;
+
+        }
+
+        private void rdbTimetable_CheckedChanged(object sender, EventArgs e)
+        {
+            btnPictureReverser.Visible = false;
+            cmbDestinationLocation.Visible = false;
+            lblDestinationLocation.Visible = false;
+        }
+
+        private void rdbFromTo_CheckedChanged(object sender, EventArgs e)
+        {
+            btnPictureReverser.Visible = true;
+            cmbDestinationLocation.Visible = true;
+            lblDestinationLocation.Visible = true;
+        }
+
+        private void cmbStartLocation_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnSearch_Click(this, new EventArgs());
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                Environment.Exit(0);
+            }
+        }
+
+        private void cmbDestinationLocation_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnSearch_Click(this, new EventArgs());
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                Environment.Exit(0);
+            }
+        }
+
+        private void btnSearchStations_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Funktion noch nicht vorhanden \n" +
+            "Error");
+        }
+
 
     }
 }

@@ -99,6 +99,7 @@
             this.Controls.Add(this.btnMailToSend);
             this.Name = "MailTo";
             this.Text = "MailTo";
+            this.Load += new System.EventHandler(this.MailTo_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

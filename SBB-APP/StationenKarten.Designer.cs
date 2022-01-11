@@ -61,6 +61,7 @@
             this.btnCardKarte.TabIndex = 1;
             this.btnCardKarte.Text = "Karte";
             this.btnCardKarte.UseVisualStyleBackColor = true;
+            this.btnCardKarte.Click += new System.EventHandler(this.btnCardKarte_Click);
             // 
             // lblCardTitel
             // 
