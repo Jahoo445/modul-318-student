@@ -40,13 +40,8 @@
             this.rdbArrival = new System.Windows.Forms.RadioButton();
             this.rdbDeparture = new System.Windows.Forms.RadioButton();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.ltvConnections = new System.Windows.Forms.ListView();
-            this.clmStartstation = new System.Windows.Forms.ColumnHeader();
-            this.clmAbfahrtsuhrzeit = new System.Windows.Forms.ColumnHeader();
-            this.clmEndstation = new System.Windows.Forms.ColumnHeader();
-            this.clmAnkunft = new System.Windows.Forms.ColumnHeader();
-            this.clmReisezeit = new System.Windows.Forms.ColumnHeader();
-            this.clmVerspätungen = new System.Windows.Forms.ColumnHeader();
+            this.btnSearchStations = new System.Windows.Forms.Button();
+            this.flpStationResult = new System.Windows.Forms.FlowLayoutPanel();
             this.grbLocation.SuspendLayout();
             this.grbTime.SuspendLayout();
             this.SuspendLayout();
@@ -57,9 +52,9 @@
             this.grbLocation.Controls.Add(this.lblStartLocation);
             this.grbLocation.Controls.Add(this.cmbDestinationLocation);
             this.grbLocation.Controls.Add(this.cmbStartLocation);
-            this.grbLocation.Location = new System.Drawing.Point(12, 12);
+            this.grbLocation.Location = new System.Drawing.Point(12, 133);
             this.grbLocation.Name = "grbLocation";
-            this.grbLocation.Size = new System.Drawing.Size(369, 100);
+            this.grbLocation.Size = new System.Drawing.Size(379, 100);
             this.grbLocation.TabIndex = 0;
             this.grbLocation.TabStop = false;
             this.grbLocation.Text = "Orts Angaben";
@@ -109,16 +104,16 @@
             this.grbTime.Controls.Add(this.chbSpecifyTime);
             this.grbTime.Controls.Add(this.rdbArrival);
             this.grbTime.Controls.Add(this.rdbDeparture);
-            this.grbTime.Location = new System.Drawing.Point(12, 133);
+            this.grbTime.Location = new System.Drawing.Point(472, 133);
             this.grbTime.Name = "grbTime";
             this.grbTime.Size = new System.Drawing.Size(369, 100);
-            this.grbTime.TabIndex = 1;
+            this.grbTime.TabIndex = 50;
             this.grbTime.TabStop = false;
             this.grbTime.Text = "Zeit und Datum";
             // 
             // dtpTime
             // 
-            this.dtpTime.CustomFormat = "HH:mm / yyyy-MM-dd";
+            this.dtpTime.CustomFormat = "dd-MM-yyyy\\ HH:mm";
             this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpTime.Location = new System.Drawing.Point(121, 36);
             this.dtpTime.Name = "dtpTime";
@@ -131,7 +126,7 @@
             this.chbSpecifyTime.Location = new System.Drawing.Point(6, 41);
             this.chbSpecifyTime.Name = "chbSpecifyTime";
             this.chbSpecifyTime.Size = new System.Drawing.Size(52, 19);
-            this.chbSpecifyTime.TabIndex = 6;
+            this.chbSpecifyTime.TabIndex = 4;
             this.chbSpecifyTime.Text = "Zeit: ";
             this.chbSpecifyTime.UseVisualStyleBackColor = true;
             this.chbSpecifyTime.CheckedChanged += new System.EventHandler(this.chbSpecifyTime_CheckedChanged);
@@ -160,71 +155,42 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(491, 12);
+            this.btnSearch.Location = new System.Drawing.Point(12, 54);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(212, 221);
+            this.btnSearch.Size = new System.Drawing.Size(369, 64);
             this.btnSearch.TabIndex = 3;
             this.btnSearch.Text = "Verbindungen Suchen";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // ltvConnections
+            // btnSearchStations
             // 
-            this.ltvConnections.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
-            this.ltvConnections.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.clmStartstation,
-            this.clmAbfahrtsuhrzeit,
-            this.clmEndstation,
-            this.clmAnkunft,
-            this.clmReisezeit,
-            this.clmVerspätungen});
-            this.ltvConnections.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ltvConnections.FullRowSelect = true;
-            this.ltvConnections.GridLines = true;
-            this.ltvConnections.Location = new System.Drawing.Point(12, 267);
-            this.ltvConnections.Name = "ltvConnections";
-            this.ltvConnections.Size = new System.Drawing.Size(904, 275);
-            this.ltvConnections.TabIndex = 5;
-            this.ltvConnections.UseCompatibleStateImageBehavior = false;
-            this.ltvConnections.View = System.Windows.Forms.View.Details;
-            this.ltvConnections.SelectedIndexChanged += new System.EventHandler(this.ltvConnections_SelectedIndexChanged);
+            this.btnSearchStations.Location = new System.Drawing.Point(472, 54);
+            this.btnSearchStations.Name = "btnSearchStations";
+            this.btnSearchStations.Size = new System.Drawing.Size(369, 64);
+            this.btnSearchStations.TabIndex = 5;
+            this.btnSearchStations.Text = "Stationen in der nähe Suchen";
+            this.btnSearchStations.UseVisualStyleBackColor = true;
             // 
-            // clmStartstation
+            // flpStationResult
             // 
-            this.clmStartstation.Text = "Startstation";
-            this.clmStartstation.Width = 150;
-            // 
-            // clmAbfahrtsuhrzeit
-            // 
-            this.clmAbfahrtsuhrzeit.Text = "Abfahrtsuhrzeit";
-            this.clmAbfahrtsuhrzeit.Width = 150;
-            // 
-            // clmEndstation
-            // 
-            this.clmEndstation.Text = "Endstation";
-            this.clmEndstation.Width = 150;
-            // 
-            // clmAnkunft
-            // 
-            this.clmAnkunft.Text = "Ankunft";
-            this.clmAnkunft.Width = 150;
-            // 
-            // clmReisezeit
-            // 
-            this.clmReisezeit.Text = "Reisezeit";
-            this.clmReisezeit.Width = 150;
-            // 
-            // clmVerspätungen
-            // 
-            this.clmVerspätungen.Text = "Verspätungen";
-            this.clmVerspätungen.Width = 150;
+            this.flpStationResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flpStationResult.AutoScroll = true;
+            this.flpStationResult.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flpStationResult.Location = new System.Drawing.Point(12, 239);
+            this.flpStationResult.Name = "flpStationResult";
+            this.flpStationResult.Size = new System.Drawing.Size(829, 298);
+            this.flpStationResult.TabIndex = 8;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1121, 549);
-            this.Controls.Add(this.ltvConnections);
+            this.ClientSize = new System.Drawing.Size(874, 549);
+            this.Controls.Add(this.flpStationResult);
+            this.Controls.Add(this.btnSearchStations);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.grbTime);
             this.Controls.Add(this.grbLocation);
@@ -252,12 +218,7 @@
         private RadioButton rdbArrival;
         private RadioButton rdbDeparture;
         private Button btnSearch;
-        private ListView ltvConnections;
-        private ColumnHeader clmStartstation;
-        private ColumnHeader clmAbfahrtsuhrzeit;
-        private ColumnHeader clmEndstation;
-        private ColumnHeader clmAnkunft;
-        private ColumnHeader clmReisezeit;
-        private ColumnHeader clmVerspätungen;
+        private Button btnSearchStations;
+        private FlowLayoutPanel flpStationResult;
     }
 }

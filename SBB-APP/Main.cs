@@ -1,6 +1,6 @@
 using System;
 using System.Windows.Forms;
-using SBB;
+using SBB_APP;
 using SwissTransport.Core;
 using SwissTransport.Models;
 
@@ -9,12 +9,64 @@ namespace SBB_APP
     public partial class Main : Form
     {
         private readonly Transport _transportHandler;
-        private Detail _detailview;
         public Main()
         {
             _transportHandler = new Transport();
-            _detailview = new Detail();
             InitializeComponent();
+            ButtonsCheckEnabled();
+        }
+        private void ButtonsCheckEnabled()
+        {
+            if (chbSpecifyTime.Checked)
+            {
+                dtpTime.Enabled = true;
+                rdbArrival.Enabled = true;
+                rdbDeparture.Enabled = true;
+            }
+            else
+            {
+                dtpTime.Enabled = false;
+                rdbArrival.Enabled = false;
+                rdbDeparture.Enabled = false;
+            }
+        }
+
+
+        private void GetConnectionswithCards(Connection connection)
+        {
+            try
+            {
+                TimeSpan? Fahrdauer;
+                var stationenKarten = new Stationen_Karten();
+                flpStationResult.Controls.Add(stationenKarten);
+                stationenKarten.Width = 829;
+                stationenKarten.Height = 150;
+                stationenKarten.Titel = Convert.ToString(connection.From.Station.Name) + " --> " + Convert.ToString(connection.To.Station.Name);
+                stationenKarten.Info1Bez = "Abfahrtzeit: ";
+                stationenKarten.Info1 = connection.From.Departure.Value.ToString("dd.MM.yyyy HH:mm");
+                stationenKarten.Info2Bez = "Ankunftszeit: ";
+                stationenKarten.Info2 = connection.To.Arrival.Value.ToString("dd.MM.yyyy HH:mm");
+                stationenKarten.Info3Bez = "Fahrtdauer: ";
+                Fahrdauer = connection.To.Arrival - connection.From.Departure;
+                stationenKarten.Info3 = Fahrdauer.Value.ToString(@"hh\:mm");
+                if (connection.To.Delay > 0 || connection.To.Delay != null)
+                {
+                    stationenKarten.Verspaetung1 = "+ " + Convert.ToString(connection.To.Delay);
+                }
+                else
+                {
+                    stationenKarten.Verspaetung1 = "";
+                    stationenKarten.VerspaetungBez = "";
+                }
+                // i++;
+                // if (i == 10) { break; }
+
+            }
+            catch
+            {
+                System.Windows.Forms.MessageBox.Show("Keine Ergebnisse gefunden.");
+            }
+
         }
 
         private void GetStationRecomendations(ComboBox ComboBoxElement)
@@ -47,39 +99,8 @@ namespace SBB_APP
             }
         }
 
-        private void AddConnectionToList(Connection connection)
-        {
-            string[] row = new string[]
-            {
-                connection.From.Station.Name,
-                connection.From.Departure.ToString(),
-                connection.To.Station.Name,
-                connection.To.Arrival.ToString(),
-                (DateTime.Parse(connection.To.Arrival.ToString())-DateTime.Parse(connection.From.Departure.ToString())).ToString(),
-                "-"
-            };
 
-            ltvConnections.Items.Add(new ListViewItem(row)
-            {
-                Tag = connection
-            });
-        }
 
-        private void ButtonsCheckEnabled()
-        {
-            if (chbSpecifyTime.Checked)
-            {
-                dtpTime.Enabled = true;
-                rdbArrival.Enabled = true;
-                rdbDeparture.Enabled = true;
-            }
-            else
-            {
-                dtpTime.Enabled = false;
-                rdbArrival.Enabled = false;
-                rdbDeparture.Enabled = false;
-            }
-        }
 
         private void GetStations()
         {
@@ -103,69 +124,32 @@ namespace SBB_APP
                 lala = 0;
                 trainTime = DateTime.Now;
             }
-            Connections _connections = _transportHandler.GetConnections(cmbStartLocation.Text, cmbDestinationLocation.Text);
+            Connections _connections = _transportHandler.GetConnections(cmbStartLocation.Text, cmbDestinationLocation.Text, lala, trainTime, trainTime);
 
-            ltvConnections.Items.Clear();
+            flpStationResult.Controls.Clear();
 
             foreach (Connection connection in _connections.ConnectionList)
             {
-                AddConnectionToList(connection);
+                GetConnectionswithCards(connection);
             }
         }
 
         private void cmbStartLocation_TextUpdate(object sender, EventArgs e)
         {
             GetStationRecomendations(cmbStartLocation);
+            cmbStartLocation.SelectionStart = cmbStartLocation.Text.Length;
         }
 
         private void cmbDestinationLocation_TextUpdate(object sender, EventArgs e)
         {
             GetStationRecomendations(cmbDestinationLocation);
+            cmbDestinationLocation.SelectionStart= cmbDestinationLocation.Text.Length;
         }
 
-        private void getPossibleStation()
-        {
-            try
-            {
-                Station station = _transportHandler.GetStations(cmbStartLocation.Text).StationList.ElementAt(0);
-
-                StationBoardRoot board = _transportHandler.GetStationBoard(station.Name, station.Id);
-
-                Cursor.Current = Cursors.WaitCursor;
-
-                foreach (StationBoard bord in board.Entries)
-                {
-                    try
-                    {
-                        Station to_station = _transportHandler.GetStations(bord.To).StationList.ElementAt(0);
-
-                        Connection connection = _transportHandler.GetConnections(station.Name, to_station.Name);
-
-                        AddConnectionToList(connection);
-                    }
-                    catch
-                    {
-                        return;
-                    }
-                }
-                Cursor.Current = Cursors.Default;
-            }
-            catch
-            {
-                return;
-            }
-        }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (cmbDestinationLocation.Text == "")
-            {
-                getPossibleStation();
-            }
-            else
-            {
-                GetStations();
-            }
+            GetStations();
         }
 
         private void chbSpecifyTime_CheckedChanged(object sender, EventArgs e)
@@ -173,18 +157,5 @@ namespace SBB_APP
             ButtonsCheckEnabled();
         }
 
-        private void ltvConnections_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (ltvConnections.SelectedItems.Count <= 0 || ltvConnections.SelectedIndices[0] < 0)
-            {
-                return;
-            }
-
-            ListViewItem item = ltvConnections.SelectedItems[0];
-            Console.WriteLine(item.Tag);
-
-            _detailview.Tag = item.Tag;
-            _detailview.ShowDialog(this);
-        }
     }
 }
