@@ -12,6 +12,7 @@ namespace SBB_APP
 {
     public partial class Stationen_Karten : UserControl
     {
+#pragma warning disable CS8618 // Ein Non-Nullable-Feld muss beim Beenden des Konstruktors einen Wert ungleich NULL enthalten. Erwägen Sie die Deklaration als Nullable.
         public Stationen_Karten()
         {
             InitializeComponent();

@@ -15,6 +15,7 @@ namespace SBB_APP
             InitializeComponent();
             ButtonsCheckEnabled();
         }
+
         private void ButtonsCheckEnabled()
         {
             if (chbSpecifyTime.Checked)
@@ -43,12 +44,21 @@ namespace SBB_APP
                 stationenKarten.Height = 150;
                 stationenKarten.Titel = Convert.ToString(connection.From.Station.Name) + " --> " + Convert.ToString(connection.To.Station.Name);
                 stationenKarten.Info1Bez = "Abfahrtzeit: ";
-                stationenKarten.Info1 = connection.From.Departure.Value.ToString("dd.MM.yyyy HH:mm");
+                if (connection.From.Departure.HasValue)
+                {
+                    stationenKarten.Info1 = connection.From.Departure.Value.ToString("dd.MM.yyyy HH:mm");
+                }          
                 stationenKarten.Info2Bez = "Ankunftszeit: ";
-                stationenKarten.Info2 = connection.To.Arrival.Value.ToString("dd.MM.yyyy HH:mm");
+                if (connection.To.Arrival.HasValue)
+                {
+                    stationenKarten.Info2 = connection.To.Arrival.Value.ToString("dd.MM.yyyy HH:mm");
+                }
                 stationenKarten.Info3Bez = "Fahrtdauer: ";
                 Fahrdauer = connection.To.Arrival - connection.From.Departure;
-                stationenKarten.Info3 = Fahrdauer.Value.ToString(@"hh\:mm");
+                if (Fahrdauer.HasValue)
+                {
+                    stationenKarten.Info3 = Fahrdauer.Value.ToString(@"hh\:mm");
+                }
                 if (connection.To.Delay > 0 || connection.To.Delay != null)
                 {
                     stationenKarten.Verspaetung1 = "+ " + Convert.ToString(connection.To.Delay);

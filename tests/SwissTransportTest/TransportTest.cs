@@ -1,5 +1,6 @@
 ﻿namespace SwissTransport
 {
+    using System;
     using System.Threading.Tasks;
     using FluentAssertions;
     using SwissTransport.Core;
@@ -50,7 +51,8 @@
         [Fact]
         public async Task ConnectionsAsync()
         {
-            Connections connections = await this.testee.GetConnectionsAsync("Sursee", "Luzern");
+            DateTime dateTime = DateTime.Now;
+            Connections connections = await this.testee.GetConnectionsAsync("Sursee", "Luzern", 1, dateTime, dateTime);
 
             connections.Should().NotBeNull();
         }
@@ -58,7 +60,8 @@
         [Fact]
         public void Connections()
         {
-            Connections connections = this.testee.GetConnections("Sursee", "Luzern");
+            DateTime dateTime = DateTime.Now;
+            Connections connections = this.testee.GetConnections("Sursee", "Luzern", 1, dateTime, dateTime);
 
             connections.Should().NotBeNull();
         }
