@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnCardShare = new System.Windows.Forms.Button();
-            this.btnCardKarte = new System.Windows.Forms.Button();
             this.lblCardTitel = new System.Windows.Forms.Label();
             this.lblCardDepartureTime = new System.Windows.Forms.Label();
             this.lblCardDepartureTimePlaceholder = new System.Windows.Forms.Label();
@@ -39,29 +37,8 @@
             this.lblCardDurationPlaceholder = new System.Windows.Forms.Label();
             this.lblCardDestinationTime = new System.Windows.Forms.Label();
             this.lblCardDestinationTimePlaceholder = new System.Windows.Forms.Label();
+            this.btnCardShare = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // btnCardShare
-            // 
-            this.btnCardShare.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCardShare.Location = new System.Drawing.Point(628, 10);
-            this.btnCardShare.Name = "btnCardShare";
-            this.btnCardShare.Size = new System.Drawing.Size(105, 57);
-            this.btnCardShare.TabIndex = 0;
-            this.btnCardShare.Text = "Teilen";
-            this.btnCardShare.UseVisualStyleBackColor = true;
-            this.btnCardShare.Click += new System.EventHandler(this.btnCardShare_Click);
-            // 
-            // btnCardKarte
-            // 
-            this.btnCardKarte.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCardKarte.Location = new System.Drawing.Point(628, 73);
-            this.btnCardKarte.Name = "btnCardKarte";
-            this.btnCardKarte.Size = new System.Drawing.Size(105, 61);
-            this.btnCardKarte.TabIndex = 1;
-            this.btnCardKarte.Text = "Karte";
-            this.btnCardKarte.UseVisualStyleBackColor = true;
-            this.btnCardKarte.Click += new System.EventHandler(this.btnCardKarte_Click);
             // 
             // lblCardTitel
             // 
@@ -151,6 +128,17 @@
             this.lblCardDestinationTimePlaceholder.TabIndex = 8;
             this.lblCardDestinationTimePlaceholder.Text = "Platzhalter";
             // 
+            // btnCardShare
+            // 
+            this.btnCardShare.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCardShare.Location = new System.Drawing.Point(647, 12);
+            this.btnCardShare.Name = "btnCardShare";
+            this.btnCardShare.Size = new System.Drawing.Size(149, 122);
+            this.btnCardShare.TabIndex = 0;
+            this.btnCardShare.Text = "Teilen";
+            this.btnCardShare.UseVisualStyleBackColor = true;
+            this.btnCardShare.Click += new System.EventHandler(this.btnCardShare_Click);
+            // 
             // Stationen_Karten
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -165,7 +153,6 @@
             this.Controls.Add(this.lblCardDestinationTime);
             this.Controls.Add(this.lblCardDepartureTime);
             this.Controls.Add(this.lblCardTitel);
-            this.Controls.Add(this.btnCardKarte);
             this.Controls.Add(this.btnCardShare);
             this.Name = "Stationen_Karten";
             this.Size = new System.Drawing.Size(826, 148);
@@ -176,9 +163,6 @@
         }
 
         #endregion
-
-        private Button btnCardShare;
-        private Button btnCardKarte;
         private Label lblCardTitel;
         private Label lblCardDepartureTime;
         private Label lblCardDepartureTimePlaceholder;
@@ -188,5 +172,6 @@
         private Label lblCardDurationPlaceholder;
         private Label lblCardDestinationTime;
         private Label lblCardDestinationTimePlaceholder;
+        private Button btnCardShare;
     }
 }

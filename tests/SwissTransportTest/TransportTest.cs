@@ -35,7 +35,7 @@
         [Fact]
         public async Task StationBoardAsync()
         {
-            StationBoardRoot stationBoard = await this.testee.GetStationBoardAsync("Sursee", "8502007");
+            StationBoardRoot stationBoard = await this.testee.GetStationBoardAsync("Sursee");
 
             stationBoard.Should().NotBeNull();
         }
@@ -43,7 +43,7 @@
         [Fact]
         public void StationBoard()
         {
-            StationBoardRoot stationBoard = this.testee.GetStationBoard("Sursee", "8502007");
+            StationBoardRoot stationBoard = this.testee.GetStationBoard("Sursee");
 
             stationBoard.Should().NotBeNull();
         }
