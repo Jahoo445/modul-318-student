@@ -107,12 +107,12 @@ namespace SBB_APP
 
         private void MailTo_Load(object sender, EventArgs e)
         {
-            MessageBox.Show("Ist noch nicht Funktionsfähig");
+
         }
 
         private void rtbxBodyPart_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && e.KeyCode == Keys.Control)
+            if (e.KeyCode == Keys.Enter && e.Control)
             {
                 btnMailToSend_Click(this, new EventArgs());
             }
