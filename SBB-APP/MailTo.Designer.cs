@@ -41,7 +41,7 @@
             this.btnMailToSend.Location = new System.Drawing.Point(12, 12);
             this.btnMailToSend.Name = "btnMailToSend";
             this.btnMailToSend.Size = new System.Drawing.Size(103, 84);
-            this.btnMailToSend.TabIndex = 0;
+            this.btnMailToSend.TabIndex = 4;
             this.btnMailToSend.Text = "Senden ";
             this.btnMailToSend.UseVisualStyleBackColor = true;
             this.btnMailToSend.Click += new System.EventHandler(this.btnMailToSend_Click);
@@ -58,15 +58,16 @@
             this.rtbxBodyPart.Location = new System.Drawing.Point(121, 113);
             this.rtbxBodyPart.Name = "rtbxBodyPart";
             this.rtbxBodyPart.Size = new System.Drawing.Size(667, 325);
-            this.rtbxBodyPart.TabIndex = 2;
+            this.rtbxBodyPart.TabIndex = 3;
             this.rtbxBodyPart.Text = "";
+            this.rtbxBodyPart.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rtbxBodyPart_KeyDown);
             // 
             // tbxMailToSubject
             // 
             this.tbxMailToSubject.Location = new System.Drawing.Point(195, 73);
             this.tbxMailToSubject.Name = "tbxMailToSubject";
             this.tbxMailToSubject.Size = new System.Drawing.Size(250, 23);
-            this.tbxMailToSubject.TabIndex = 3;
+            this.tbxMailToSubject.TabIndex = 2;
             // 
             // lblMailToSubject
             // 

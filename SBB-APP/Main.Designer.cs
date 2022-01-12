@@ -68,6 +68,7 @@
             this.grbLocation.TabIndex = 0;
             this.grbLocation.TabStop = false;
             this.grbLocation.Text = "Orts Angaben";
+            this.grbLocation.Enter += new System.EventHandler(this.grbLocation_Enter);
             // 
             // rdbTakeMeHome
             // 
@@ -146,7 +147,6 @@
             this.cmbDestinationLocation.Size = new System.Drawing.Size(242, 23);
             this.cmbDestinationLocation.TabIndex = 2;
             this.cmbDestinationLocation.TextUpdate += new System.EventHandler(this.cmbDestinationLocation_TextUpdate);
-            this.cmbDestinationLocation.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbDestinationLocation_KeyDown);
             // 
             // cmbStartLocation
             // 
@@ -158,7 +158,6 @@
             this.cmbStartLocation.Size = new System.Drawing.Size(242, 23);
             this.cmbStartLocation.TabIndex = 1;
             this.cmbStartLocation.TextUpdate += new System.EventHandler(this.cmbStartLocation_TextUpdate);
-            this.cmbStartLocation.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbStartLocation_KeyDown);
             // 
             // grbTime
             // 
@@ -246,6 +245,7 @@
             // 
             // Main
             // 
+            this.AcceptButton = this.btnSearch;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(856, 549);

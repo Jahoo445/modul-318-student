@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SwissTransport.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -106,6 +107,8 @@ namespace SBB_APP
             get { return _verspaetung1; }
             set { _verspaetung1 = value; lblCardDelayPlaceholder.Text = value; }
         }
+
+        public Connection connection { get; internal set; }
         #endregion
 
 
@@ -116,7 +119,9 @@ namespace SBB_APP
 
         private void btnCardShare_Click(object sender, EventArgs e)
         {
+            _SendMail.toMailConnection = connection;
             _SendMail.ShowDialog(this);
+
         }
 
         private void btnCardKarte_Click(object sender, EventArgs e)
