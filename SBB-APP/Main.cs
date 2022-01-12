@@ -105,27 +105,27 @@ namespace SBB_APP
 
         private void GetStations()
         {
-            int lala;
+            int indexDepOrAri;
             DateTime trainTime;
 
             if (chbSpecifyTime.Checked)
             {
                 if (rdbDeparture.Checked)
                 {
-                    lala = 0;
+                    indexDepOrAri = 0;
                 }
                 else
                 {
-                    lala = 1;
+                    indexDepOrAri = 1;
                 }
                 trainTime = dtpTime.Value;
             }
             else
             {
-                lala = 0;
+                indexDepOrAri = 0;
                 trainTime = DateTime.Now;
             }
-            Connections _connections = _transportHandler.GetConnections(cmbStartLocation.Text, cmbDestinationLocation.Text, lala, trainTime, trainTime);
+            Connections _connections = _transportHandler.GetConnections(cmbStartLocation.Text, cmbDestinationLocation.Text, indexDepOrAri, trainTime, trainTime);
 
 
 
@@ -145,24 +145,24 @@ namespace SBB_APP
 
                 Cursor.Current = Cursors.WaitCursor;
 
-                int lala;
+                int indexDepOrAri;
                 DateTime trainTime;
 
                 if (chbSpecifyTime.Checked)
                 {
                     if (rdbDeparture.Checked)
                     {
-                        lala = 0;
+                        indexDepOrAri = 0;
                     }
                     else
                     {
-                        lala = 1;
+                        indexDepOrAri = 1;
                     }
                     trainTime = dtpTime.Value;
                 }
                 else
                 {
-                    lala = 0;
+                    indexDepOrAri = 0;
                     trainTime = DateTime.Now;
                 }
 
@@ -172,7 +172,7 @@ namespace SBB_APP
                     try
                     {
 
-                        Connections _connections = _transportHandler.GetConnections(station.Name, bord.To, lala, trainTime, trainTime);
+                        Connections _connections = _transportHandler.GetConnections(station.Name, bord.To, indexDepOrAri, trainTime, trainTime);
                         foreach (Connection connection in _connections.ConnectionList)
                         {
                             int i = 0;
@@ -207,28 +207,28 @@ namespace SBB_APP
 
         private void TakeMeHome()
         {
-            int lala;
+            int indexDepOrAri;
             DateTime trainTime;
 
             if (chbSpecifyTime.Checked)
             {
                 if (rdbDeparture.Checked)
                 {
-                    lala = 0;
+                    indexDepOrAri = 0;
                 }
                 else
                 {
-                    lala = 1;
+                    indexDepOrAri = 1;
                 }
                 trainTime = dtpTime.Value;
             }
             else
             {
-                lala = 0;
+                indexDepOrAri = 0;
                 trainTime = DateTime.Now;
             }
 
-            Connections _connections = _transportHandler.GetConnections(cmbStartLocation.Text, "Rothenburg", lala, trainTime, trainTime);
+            Connections _connections = _transportHandler.GetConnections(cmbStartLocation.Text, "Rothenburg", indexDepOrAri, trainTime, trainTime);
 
             foreach (Connection connection in _connections.ConnectionList)
             {
